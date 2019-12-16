@@ -1,0 +1,49 @@
+/* Lecture discussion about bit masking, ignoring data types */
+
+/* Simple example for an 8 bit value */
+a = 01000001;  // Starting value ( state)
+b = 00000001;  // Our mask for the right-most bit
+
+b2 = 01000000;     // A different mask for the second bit from the left
+c = 0;
+c2 = 0;
+
+c = a & b;  // Using the mask for the right-most bit
+c = 00000001;  // Result for c
+
+c2 = a & b2; // Using the mask for the second bit from the left
+
+c2 = 01000000;    // Result for c2
+
+/* To move the bits right to check whether 1 or 0 */
+c2 = c2 >> 6;
+c2 = 00000001;  // Result of bit shifting
+
+
+/* Longer example similar to the assignment, however we are using a 
+16 bit integer here, not a DWORD type */
+state = 01010001000101100000;  // Decimal value = 332128, hex value is 0x51160
+
+XINPUT_GAMEPAD_LEFT_THUMB = 0x0040;    // Defined in the xinput library
+XINPUT_GAMEPAD_LEFT_THUMB = 0000000001000000;     // In binary
+
+result = state & XINPUT_GAMEPAD_LEFT_THUMB;
+result = 0000000001000000;
+
+left_thumb_result = result >> 6;
+/* left_thumb_result will always be 0 or 1, giving the state of that bit
+irrespective of all other bits */
+
+/* Even longer example to get out a number (not just binary value) from the state
+(may not be necessary for the assignment) */
+MASK_TO_GET_NON_BINARY = 0000000011110000;  /* Note multiple consective bits are set
+in order to extract a 4 bit number from that portion of the state */
+result = state & MASK_TO_GET_NON_BINARY;
+result = 0000000001100000;
+result = result >> 4;
+result = 0000000000000110;
+result = 6;
+
+
+
+
